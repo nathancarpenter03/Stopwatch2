@@ -24,7 +24,7 @@ var fifteenSecs;
 function timerRunning() {
     deciseconds++;
     timerDiv.innerHTML = `${minutes}:${seconds}:${deciseconds}` + '0';
-    if (deciseconds >= 10) {
+    if (deciseconds >= 9) {
         seconds++;
         deciseconds = 0;
         // colorChanger();
@@ -44,7 +44,8 @@ function timerReset() {
     startButton.innerText = 'Start';
     timerDiv.innerText='00:00:00';
     secondHand.style.transform = 'rotate(90deg)';
-};
+    clearInterval(timer);
+}; 
 
 // Event Listener for clicking on button and run function at set interval
 startButton.addEventListener("click", function(e) { 
@@ -57,13 +58,14 @@ startButton.addEventListener("click", function(e) {
     else if (e.target.innerHTML === 'Pause') {
         e.target.innerHTML = 'Resume';
         clearInterval(timer);
-        fifteenSecs = setTimeout(timerReset, 15000)
+        fifteenSecs = setTimeout(timerReset, 15000);
     } 
 
     else if (e.target.innerHTML = 'Resume') {
         clearTimeout(fifteenSecs);
         e.target.innerHTML = 'Pause';
         timer = setInterval(timerRunning, 100);
+        // resetButton.disabled = 'true';
     }
 }); 
 
